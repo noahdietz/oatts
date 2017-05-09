@@ -28,7 +28,7 @@ describe('process', function() {
                 var data = process(api, {})
                 expect(data).to.not.be.null
                 expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
-                expect(data.schemes).to.not.be.empty
+                expect(data.schemes).to.not.equal("")
                 expect(data.tests).to.not.be.empty
                 done()
             }, function (err) {
@@ -44,8 +44,7 @@ describe('process', function() {
                 var data = process(api, {'paths': ['/pet']})
                 expect(data).to.not.be.null
                 expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
-                expect(data.schemes).to.not.be.empty
-                expect(data.schemes[0]).to.equal("http", "expected schemes to be http but it was: " + data.schemes[0])
+                expect(data.schemes).to.not.equal("")
                 expect(data.consumes).to.be.empty
                 expect(data.tests.length).to.equal(1, "returned tests set was expected to have 1 item, but it had " + data.tests.length)
                 done()
@@ -61,7 +60,7 @@ describe('process', function() {
                 var data = process(api, {'host': optionHost})
                 expect(data).to.not.be.null
                 expect(data.host).to.equal(optionHost, "generated host property expected to be " + optionHost + " but was " + data.host)
-                expect(data.schemes).to.not.be.empty
+                expect(data.schemes).to.not.equal("")
                 expect(data.tests).to.not.be.empty
                 done()
             }, function (err) {
@@ -75,7 +74,7 @@ describe('process', function() {
                 var data = process(api, {'samples': true, 'paths': ['/pet/{petId}']})
                 expect(data).to.not.be.null
                 expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
-                expect(data.schemes).to.not.be.empty
+                expect(data.schemes).to.not.equal("")
                 expect(data.tests).to.not.be.empty
                 done()
             }, function (err) {
