@@ -81,5 +81,38 @@ describe('process', function() {
                 done(err)
             });
         })
+
+        it('should process \'/pet/findByStatus\' correctly with customValues.headers from a file', function(done) {
+            var expectedHeaders = { 
+                GlobalShow: 'global',
+                PathOverride: 'path',
+                OpOverrideFromGlobal: 'op',
+                PathShow: 'path',
+                OpOverrideFromPath: 'op',
+                OpShow: 'op',
+                Accept: 'application/xml'
+            }
+
+            sway.create({'definition': specPath})
+            .then(function (api) {
+                var customVals = require('./documents/customValuesTest.json')
+                var data = process(api, {
+                    'customValues': customVals,
+                    'paths': ['/pet/findByStatus']
+                })
+
+                expect(data).to.not.be.null
+                expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
+                expect(data.schemes).to.not.equal("")
+                expect(data.tests).to.not.be.empty
+                data.tests[0].operations[0].transactions.forEach(function(item, ndx, arr) {
+                    expect(item.headers).to.deep.equal(expectedHeaders)
+                })
+
+                done()
+            }, function (err) {
+                done(err)
+            });
+        })
     })
 })

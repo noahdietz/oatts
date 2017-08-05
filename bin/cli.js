@@ -18,7 +18,6 @@
 var cli = require('commander')
 var oatts = require('../index')
 var util = require('./util')
-var merge2 = require('../lib/util').merge2
 var join = require('path').join;
 
 cli.version(require('../package.json').version)
@@ -39,15 +38,6 @@ cli.command('generate')
     .action(function(options)  {
         options.error = util.optionError;
         if (!options.spec) { return  options.error('spec path is required'); }
-        
-        if (options.customValues) {
-            options.customValues = JSON.parse(options.customValues);
-        }
-
-        if (options.customValuesFile) {
-            var customFromFile = require(join(process.cwd(), options.customValuesFile))
-            options.customValues = merge2(options.customValues, customFromFile)
-        }
         
         var generated = oatts.generate(options.spec, options);
         generated.then(function(gen){

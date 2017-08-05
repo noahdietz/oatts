@@ -1,0 +1,21 @@
+{
+    "headers": {
+        "GlobalShow": "global",
+        "PathOverride": "global",
+        "OpOverrideFromGlobal": "global"
+    },
+    "/pet/findByStatus": {
+        "headers":{
+            "PathShow": "path",
+            "PathOverride": "path",
+            "OpOverrideFromPath": "path"
+        },
+        "get": {
+            "headers": {
+                "OpShow": "op",
+                "OpOverrideFromGlobal": "op",
+                "OpOverrideFromPath": "op"
+            }
+        }
+    }
+}
