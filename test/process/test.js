@@ -41,7 +41,7 @@ describe('process', function() {
                 expect(data.tests).to.not.be.empty
                 done()
             } catch(err) {
-                return done(err)
+                done(err)
             }
         })
     })
