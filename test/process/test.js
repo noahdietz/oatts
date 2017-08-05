@@ -71,11 +71,27 @@ describe('process', function() {
         it('should process \'/pet/{petId}\' & \'/pet\' with option.samples active correctly', function(done) {
             sway.create({'definition': specPath})
             .then(function (api) {
-                var data = process(api, {'samples': true, 'paths': ['/pet/{petId}']})
+                var data = process(api, {'samples': true, 'paths': ['/pet', '/pet/{petId}']})
                 expect(data).to.not.be.null
                 expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
                 expect(data.schemes).to.not.equal("")
+                expect(data.tests.length).to.equal(2)
+                done()
+            }, function (err) {
+                done(err)
+            });
+        })
+
+        it ('should process \'/pet\' with first operation consumes/produces', function(done) {
+            sway.create({'definition': specPath})
+            .then(function (api) {
+                var data = process(api, {'samples': true, 'paths': ['/pet']})
+                expect(data).to.not.be.null
+                expect(data.host).to.equal("petstore.swagger.io", "host property did not match the spec")
+                expect(data.scheme).to.equal("http")
                 expect(data.tests).to.not.be.empty
+                expect(data.tests[0].operations[0].transactions[0].headers['Content-Type']).to.equal('application/json')
+                expect(data.tests[0].operations[0].transactions[0].headers['Accept']).to.equal('application/xml')
                 done()
             }, function (err) {
                 done(err)
