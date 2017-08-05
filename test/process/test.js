@@ -106,7 +106,11 @@ describe('process', function() {
                 PathShow: 'path',
                 OpOverrideFromPath: 'op',
                 OpShow: 'op',
-                Accept: 'application/xml'
+                Accept: 'application/xml',
+                StatusCodeShow: "statusCode",
+                StatusCodeOverrideFromGlobal: "statusCode",
+                StatusCodeOverrideFromPath: "statusCode",
+                StatusCodeOverrideFromOp: "statusCode"
             }
 
             sway.create({'definition': specPath})
