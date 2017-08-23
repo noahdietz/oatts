@@ -5,6 +5,9 @@
         "OpOverrideFromGlobal": "global",
         "StatusCodeOverrideFromGlobal": "global"
     },
+    "path": {
+        "petId": 0
+    },
     "/pet/findByStatus": {
         "headers":{
             "PathShow": "path",
@@ -19,12 +22,18 @@
                 "OpOverrideFromPath": "op",
                 "StatusCodeOverrideFromOp": "op"
             },
+            "query": {
+                "status": ["notanenum1", "notanenum2"]
+            },
             "200": {
                 "headers": {
                     "StatusCodeShow": "statusCode",
                     "StatusCodeOverrideFromGlobal": "statusCode",
                     "StatusCodeOverrideFromPath": "statusCode",
                     "StatusCodeOverrideFromOp": "statusCode"
+                },
+                "query": {
+                    "status": ["notanenum3"]
                 }
             },
             "400": {
@@ -33,6 +42,30 @@
                     "StatusCodeOverrideFromGlobal": "statusCode",
                     "StatusCodeOverrideFromPath": "statusCode",
                     "StatusCodeOverrideFromOp": "statusCode"
+                }
+            }
+        }
+    }, 
+    "/pet": {
+        "post": {
+            "201": {
+                "body": {
+                    "body": {
+                        "name": "doggie",
+                        "photoUrls": ["url1", "url2", "url3"]
+                    }
+                }
+            }
+        }
+    },
+    "/pet/{petId}": {
+        "get": {
+            "path": {
+                "petId": 123
+            },
+            "200": {
+                "path": {
+                    "petId": 321
                 }
             }
         }
