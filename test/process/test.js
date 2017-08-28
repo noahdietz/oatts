@@ -103,7 +103,7 @@ describe('process', function() {
             }
         })
 
-        it('should process \'/pet/findByStatus\' correctly with customValues headers & query param from a file', function(done) {
+        it('should process \'/pet/findByStatus\' correctly with customValues headers, query param, & response body', function(done) {
             var expectedHeaders = { 
                 GlobalShow: 'global',
                 PathOverride: 'path',
@@ -134,6 +134,7 @@ describe('process', function() {
                 })
 
                 expect(data.tests[0].operations[0].transactions[0].query).to.deep.equal(customVals['/pet/findByStatus']['get']['200']['query'])
+                expect(data.tests[0].operations[0].transactions[0].expected.res).to.deep.equal(customVals['/pet/findByStatus']['get']['200']['response'])
                 expect(data.tests[0].operations[0].transactions[1].query).to.deep.equal(customVals['/pet/findByStatus']['get']['query'])
 
                 done()

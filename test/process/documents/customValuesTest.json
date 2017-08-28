@@ -34,7 +34,17 @@
                 },
                 "query": {
                     "status": ["notanenum3"]
-                }
+                },
+                "response": [
+                    {
+                        "name": "sparky",
+                        "photoUrls": ["url1", "url2", "url3"]
+                    },
+                    {
+                        "name": "champ",
+                        "photoUrls": ["url4", "url5", "url6"]
+                    }
+                ]
             },
             "400": {
                 "headers": {
