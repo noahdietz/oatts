@@ -184,5 +184,21 @@ describe('process', function() {
                 done(err)
             }
         })
+
+        it('should process /pet/{petId} correctly with header params', function(done) {
+            try {
+                var data = process(api, {
+                    'paths': ['/pet/{petId}']
+                })
+
+                expect(data).to.not.be.null
+                expect(data.tests).to.not.be.empty
+                expect(data.tests[0].operations[2].transactions[0].headers).to.have.property('api_key')
+
+                done()
+            } catch(err) {
+                done(err)
+            }
+        })
     })
 })

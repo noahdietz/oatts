@@ -1,5 +1,5 @@
 {
-    "headers": {
+    "header": {
         "GlobalShow": "global",
         "PathOverride": "global",
         "OpOverrideFromGlobal": "global",
@@ -9,14 +9,14 @@
         "petId": 0
     },
     "/pet/findByStatus": {
-        "headers":{
+        "header":{
             "PathShow": "path",
             "PathOverride": "path",
             "OpOverrideFromPath": "path",
             "StatusCodeOverrideFromPath": "path"
         },
         "get": {
-            "headers": {
+            "header": {
                 "OpShow": "op",
                 "OpOverrideFromGlobal": "op",
                 "OpOverrideFromPath": "op",
@@ -26,7 +26,7 @@
                 "status": ["notanenum1", "notanenum2"]
             },
             "200": {
-                "headers": {
+                "header": {
                     "StatusCodeShow": "statusCode",
                     "StatusCodeOverrideFromGlobal": "statusCode",
                     "StatusCodeOverrideFromPath": "statusCode",
@@ -47,7 +47,7 @@
                 ]
             },
             "400": {
-                "headers": {
+                "header": {
                     "StatusCodeShow": "statusCode",
                     "StatusCodeOverrideFromGlobal": "statusCode",
                     "StatusCodeOverrideFromPath": "statusCode",
