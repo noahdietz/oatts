@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/noahdietz/oatts.svg?branch=master)](https://travis-ci.org/noahdietz/oatts)
 
+**THIS REPOSOITORY IS DEPRECATED.** This project's development has been moved to https://github.com/google/oatts. All new NPM releases will be coming from that repository.
+
 # OpenAPI Test Templates (oatts)
 
 > Generate basic unit test scaffolding for your [OpenAPI specification](https://www.openapis.org/).
