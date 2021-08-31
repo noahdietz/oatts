@@ -1,4 +1,43 @@
-// Copyright 2018 Google Inc. All Rights Reserved.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/process.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="compilation.html">compilation</a><ul class='methods'><li data-type='method'><a href="compilation.html#compile">compile</a></li><li data-type='method'><a href="compilation.html#compileOperationLevel">compileOperationLevel</a></li><li data-type='method'><a href="compilation.html#compilePathLevel">compilePathLevel</a></li><li data-type='method'><a href="compilation.html#compileTransactionLevel">compileTransactionLevel</a></li><li data-type='method'><a href="compilation.html#prepareTemplate">prepareTemplate</a></li></ul></li><li><a href="processing.html">processing</a><ul class='methods'><li data-type='method'><a href="processing.html#determineQueryType">determineQueryType</a></li><li data-type='method'><a href="processing.html#isNumberType">isNumberType</a></li><li data-type='method'><a href="processing.html#lookupCustomQueryValue">lookupCustomQueryValue</a></li><li data-type='method'><a href="processing.html#lookupCustomValue">lookupCustomValue</a></li><li data-type='method'><a href="processing.html#pathify">pathify</a></li><li data-type='method'><a href="processing.html#process">process</a></li><li data-type='method'><a href="processing.html#processHeaders">processHeaders</a></li><li data-type='method'><a href="processing.html#processOperations">processOperations</a></li><li data-type='method'><a href="processing.html#processParams">processParams</a></li><li data-type='method'><a href="processing.html#processPaths">processPaths</a></li><li data-type='method'><a href="processing.html#processResponse">processResponse</a></li><li data-type='method'><a href="processing.html#processTransactions">processTransactions</a></li><li data-type='method'><a href="processing.html#replaceNewlines">replaceNewlines</a></li></ul></li><li><a href="templateHelpers.html">templateHelpers</a><ul class='methods'><li data-type='method'><a href="templateHelpers.html#isNotDefaultStatusCode">isNotDefaultStatusCode</a></li><li data-type='method'><a href="templateHelpers.html#json">json</a></li><li data-type='method'><a href="templateHelpers.html#notEmptyObject">notEmptyObject</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html">generate</a></li><li><a href="global.html">merge2</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib/process.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Copyright 2018 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,9 +86,9 @@ module.exports = process
 function process(api, options) {
   var processedSpec = {
     'host': (options.host !== undefined ? options.host : (api.host !== undefined
-      ? api.host : 'localhost:5000')),
+        ? api.host : 'localhost:5000')),
     'scheme': (options.scheme !== undefined ? options.scheme : (api.schemes
-      !== undefined ? api.schemes[0] : 'http')),
+    !== undefined ? api.schemes[0] : 'http')),
     'basePath': (api.basePath !== undefined ? api.basePath : ''),
     'consumes': (api.consumes !== undefined ? api.consumes : []),
     'produces': (api.produces !== undefined ? api.produces : [])
@@ -100,9 +139,9 @@ function processPaths(api, topLevel, options) {
   if (options.statusCodes !== undefined) {
     var tempPaths = [];
     options.statusCodes.forEach(function (code, ndx, arr) {
-      for (var ndx = 0; ndx < targetPaths.length; ndx++) {
+      for (var ndx = 0; ndx &lt; targetPaths.length; ndx++) {
         var opList = targetPaths[ndx].getOperations();
-        for (var opNdx = 0; opNdx < opList.length; opNdx++) {
+        for (var opNdx = 0; opNdx &lt; opList.length; opNdx++) {
           if (opList[opNdx].getResponse(code)) {
             tempPaths.push(targetPaths[ndx])
             break;
@@ -152,7 +191,7 @@ function processOperations(api, parentPath, topLevel, options) {
   var ops = []
   parentPath.getOperations().forEach(function (op, ndx, arr) {
     var transactions = processTransactions(api, op, parentPath, topLevel,
-      options)
+        options)
     if (transactions.length !== 0) {
       ops.push({
         'operationLevelDescription': 'tests for ' + op.method,
@@ -197,50 +236,38 @@ function processTransactions(api, parentOp, parentPath, topLevel, options) {
   var transactions = []
 
   parentOp.getResponses().forEach(function (res, ndx, arr) {
-    if (options.statusCodes && options.statusCodes.indexOf(res.statusCode)
-      === -1) {
+    if (options.statusCodes &amp;&amp; options.statusCodes.indexOf(res.statusCode)
+        === -1) {
       // skip unwanted status codes
       return;
     }
 
-    // count multiple status code entries
-    var count = 1;
-    if (options.customValues
-      && options.customValues[parentPath.path]
-      && options.customValues[parentPath.path][parentOp.method]
-      && options.customValues[parentPath.path][parentOp.method][res.statusCode]
-      && Array.isArray(options.customValues[parentPath.path][parentOp.method][res.statusCode])) {
-      count = options.customValues[parentPath.path][parentOp.method][res.statusCode].length;
+    var params = processParams(res.statusCode, parentOp, parentPath, options)
+
+    var expected = processResponse(res, parentOp.method, parentPath.path,
+        options)
+    var hasValue = options.samples
+    if (expected.custom) {
+      delete expected.custom
+      hasValue = true
     }
 
-    // generate transactions for all custom values
-    for (let index = 0; index < count; index++) {
-      var params = processParams(res.statusCode, parentOp, parentPath, options, index)
-      var expected = processResponse(res, parentOp.method, parentPath.path, options, index)
-
-      var hasValue = options.samples
-      if (expected.custom) {
-        delete expected.custom
-        hasValue = true
-      }
-
-      transactions.push({
-        'testLevelDescription': util.format('should respond %s for "%s"',
-          res.statusCode, escapeSingleQuotes(replaceNewlines(res.description))),
-        'scheme': topLevel.scheme,
-        'host': topLevel.host,
-        'path': (topLevel.basePath + params.path),
-        'op': parentOp.method,
-        'body': params.body,
-        'query': params.query,
-        'formData': params.formData,
-        'expected': expected,
-        'hasValue': hasValue,
-        'headers': merge2(params.headers,
+    transactions.push({
+      'testLevelDescription': util.format('should respond %s for "%s"',
+          res.statusCode, replaceNewlines(res.description)),
+      'scheme': topLevel.scheme,
+      'host': topLevel.host,
+      'path': (topLevel.basePath + params.path),
+      'op': parentOp.method,
+      'body': params.body,
+      'query': params.query,
+      'formData': params.formData,
+      'expected': expected,
+      'hasValue': hasValue,
+      'headers': merge2(params.headers,
           processHeaders(res.statusCode, parentOp, parentPath, topLevel,
-            options, index))
-      })
-    }
+              options))
+    })
   })
 
   return transactions
@@ -267,8 +294,8 @@ function processTransactions(api, parentOp, parentPath, topLevel, options) {
  * @param {object} options options to use during processing
  * @return {processing.ProcessedParams}
  */
-function processParams(code, op, path, options, index) {
-  var opCustomQuery = lookupCustomQueryValue(code, op.method, path.path, options, index);
+function processParams(code, op, path, options) {
+  var opCustomQuery = lookupCustomQueryValue(code, op.method, path.path, options);
   var params = {
     'body': {},
     'query': opCustomQuery || {},
@@ -279,9 +306,9 @@ function processParams(code, op, path, options, index) {
 
   op.getParameters().forEach(function (param, ndx, arr) {
     var customValue = lookupCustomValue(param.name, param.in, code, op.method,
-      path.path, options, index)
+      path.path, options)
     // Skip optional parameter with specifically nulled custom value or in-line example
-    if ((customValue === null || param.example === null) && (!param.required)) {
+    if ((customValue === null || param.example === null) &amp;&amp; (!param.required)) {
       return
     }
     // If multiple examples are present, use the first one
@@ -291,12 +318,12 @@ function processParams(code, op, path, options, index) {
 
     if (param.in === 'body') {
       params.body = customValue !== undefined ? customValue : param.example !== undefined ? param.example : param.getSample()
-    } else if (param.in === 'query' && !opCustomQuery) {
+    } else if (param.in === 'query' &amp;&amp; !opCustomQuery) {
       params.query[param.name] = param.example !== undefined ? param.example : param.getSample();
     } else if (param.in === 'formData') {
       try {
         params.formData[param.name] = customValue !== undefined ? customValue
-          : param.example !== undefined ? param.example : param.getSample()
+            : param.example !== undefined ? param.example :  param.getSample()
       } catch (e) { // this will be because of formData property of type 'file'
         params.formData[param.name] = '{fileUpload}'
       }
@@ -304,15 +331,15 @@ function processParams(code, op, path, options, index) {
       params.path = pathify(params.path, param, customValue)
     } else if (param.in === 'header') {
       params.headers[param.name] = customValue !== undefined ? customValue
-        : param.example !== undefined ? param.example : param.getSample()
+          : param.example !== undefined ? param.example :  param.getSample()
     }
   })
 
   path.getParameters().forEach(function (param, ndx, arr) {
     var customValue = lookupCustomValue(param.name, param.in, code, op.method,
-      path.path, options, index)
+        path.path, options)
     // Skip optional parameter with specifically nulled custom value or in-line example
-    if ((customValue === null || param.example === null) && (!param.required)) {
+    if ((customValue === null || param.example === null) &amp;&amp; (!param.required)) {
       return
     }
     params.path = pathify(params.path, param, customValue)
@@ -334,7 +361,7 @@ function processParams(code, op, path, options, index) {
  * @param {object} options for use in looking up the custom value
  * @return {any}
  */
-function lookupCustomValue(name, location, code, op, path, options, index) {
+function lookupCustomValue(name, location, code, op, path, options) {
   var levels = [path, op, code]
   var val = undefined;
 
@@ -349,8 +376,8 @@ function lookupCustomValue(name, location, code, op, path, options, index) {
         }
       }
 
-      curr = Array.isArray(curr[levels[ndx]]) ? curr[levels[ndx]][index] : curr[levels[ndx]];
-    } while (ndx++ < levels.length && curr)
+      curr = curr[levels[ndx]]
+    } while (ndx++ &lt; levels.length &amp;&amp; curr)
   }
 
   return val
@@ -367,7 +394,7 @@ function lookupCustomValue(name, location, code, op, path, options, index) {
  * @param {object} options for use in looking up the custom value
  * @return {any}
  */
-function lookupCustomQueryValue(code, op, path, options, index) {
+function lookupCustomQueryValue(code, op, path, options) {
   var levels = [path, op, code];
   var val = undefined;
 
@@ -379,9 +406,9 @@ function lookupCustomQueryValue(code, op, path, options, index) {
       if (curr.query !== undefined) {
         val = curr.query
       }
-
-      curr = Array.isArray(curr[levels[ndx]]) ? curr[levels[ndx]][index] : curr[levels[ndx]];
-    } while (ndx++ < levels.length && curr)
+    
+      curr = curr[levels[ndx]];
+    } while (ndx++ &lt; levels.length &amp;&amp; curr)
   }
 
   return val
@@ -399,7 +426,7 @@ function lookupCustomQueryValue(code, op, path, options, index) {
  * @param {object} options for use in processing headers
  * @return {object}
  */
-function processHeaders(responseCode, op, path, top, options, index) {
+function processHeaders(responseCode, op, path, top, options) {
   var headers = {};
   var levels = [path.path, op.method, responseCode]
 
@@ -413,8 +440,8 @@ function processHeaders(responseCode, op, path, top, options, index) {
         headers['Content-Type'] = op.definitionFullyResolved.consumes[0];
       }
 
-    } else if (top.consumes.length > 0 && top.consumes.indexOf(options.consumes)
-      != -1) {
+    } else if (top.consumes.length > 0 &amp;&amp; top.consumes.indexOf(options.consumes)
+        != -1) {
       headers['Content-Type'] = options.consumes;
     } else if (top.consumes.length === 1) { // unless there is a singular different global consumes, just use that one
       headers['Content-Type'] = top.consumes[0];
@@ -434,8 +461,8 @@ function processHeaders(responseCode, op, path, top, options, index) {
         headers['Accept'] = op.definitionFullyResolved.produces[0];
       }
 
-    } else if (top.produces.length > 0 && top.produces.indexOf(options.produces)
-      != -1) {
+    } else if (top.produces.length > 0 &amp;&amp; top.produces.indexOf(options.produces)
+        != -1) {
       headers['Accept'] = options.produces;
     } else if (top.produces.length === 1) {
       headers['Accept'] = top.produces[0];
@@ -456,8 +483,8 @@ function processHeaders(responseCode, op, path, top, options, index) {
         headers = merge2(curr['header'], headers)
       }
 
-      curr = Array.isArray(curr[levels[ndx]]) ? curr[levels[ndx]][index] : curr[levels[ndx]];
-    } while (ndx++ < levels.length && curr !== undefined)
+      curr = curr[levels[ndx]]
+    } while (ndx++ &lt; levels.length &amp;&amp; curr !== undefined)
   }
 
   return headers
@@ -483,33 +510,26 @@ function processHeaders(responseCode, op, path, top, options, index) {
  * @param {object} options options to use during processing
  * @return {processing.ExpectedResponse}
  */
-function processResponse(res, op, path, options, index) {
+function processResponse(res, op, path, options) {
   var expected = {
     'statusCode': res.statusCode,
     'custom': false
   }
 
   if (options.customValues
-    && options.customValues[path]
-    && options.customValues[path][op]
-    && options.customValues[path][op][res.statusCode]) {
+      &amp;&amp; options.customValues[path]
+      &amp;&amp; options.customValues[path][op]
+      &amp;&amp; options.customValues[path][op][res.statusCode]
+      &amp;&amp; options.customValues[path][op][res.statusCode].response) {
 
-    var statusCodeOptions = options.customValues[path][op][res.statusCode];
-    if (Array.isArray(statusCodeOptions)) {
-      statusCodeOptions = statusCodeOptions[index];
-    }
+    expected['res'] = options.customValues[path][op][res.statusCode].response
+    expected.custom = true;
 
-    if (statusCodeOptions.response) {
-
-      expected['res'] = statusCodeOptions.response
-      expected.custom = true;
-
-      return expected
-    }
+    return expected
   }
 
   var res = options.samples ? res.getSample()
-    : res.definitionFullyResolved.schema
+      : res.definitionFullyResolved.schema
   if (res !== undefined) {
     expected['res'] = res
   }
@@ -532,7 +552,7 @@ function pathify(path, param, value) {
   var sample = value !== undefined ? value : param.example !== undefined ? param.example : param.getSample()
   if (isNumberType(param.definition.type)) {
     // prevent negative sample values for numbers
-    while (sample < 0) {
+    while (sample &lt; 0) {
       sample = param.getSample()
     }
   }
@@ -550,7 +570,7 @@ function pathify(path, param, value) {
  */
 function isNumberType(type) {
   return (type === 'integer' || type === 'float' || type === 'long' || type
-    === 'double')
+      === 'double')
 }
 
 /**
@@ -583,15 +603,22 @@ function determineQueryType(param) {
 function replaceNewlines(str) {
   return str.replace(/\r?\n|\r/g, " ")
 }
+</code></pre>
+        </article>
+    </section>
 
-/**
- * Used to escape single quotes in each response.description
- * @function escapeSingleQuotes
- * @memberof processing
- * @instance
- * @param {string} str string to escape single quotes
- * @return {string}
- */
-function escapeSingleQuotes(str) {
-  return str.replace(/'/g, "\\'")
-}
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 12:31:35 GMT+0100 (Western European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

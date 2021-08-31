@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/noahdietz/oatts.svg?branch=master)](https://travis-ci.org/noahdietz/oatts)
+[![Build Status](https://travis-ci.org/google/oatts.svg?branch=master)](https://travis-ci.org/google/oatts)
 
 **THIS REPOSOITORY IS DEPRECATED.** This project's development has been moved to https://github.com/google/oatts. All new NPM releases will be coming from that repository.
 
@@ -7,6 +7,7 @@
 > Generate basic unit test scaffolding for your [OpenAPI specification](https://www.openapis.org/).
 
 ## Disclaimer
+This is not an officially supported Google product.
 
 `oatts` is based off of the [swagger-test-templates](https://github.com/apigee-127/swagger-test-templates) module and the lessons learned during its development.
 
@@ -104,7 +105,7 @@ After installing these, you can run the tests with mocha:
 ### Custom Values
 Custom values can be supplied through both the command line and a JSON file. The in-line, command line supplied JSON will take precedent.
 
-An example custom values JSON file can be found [here](https://github.com/noahdietz/oatts/blob/master/test/process/documents/customValuesTest.json).
+An example custom values JSON file can be found [here](./test/process/documents/customValuesTest.json).
 
 ### Custom Templates
 Custom templates can be supplied via the `templates` option. The directory pointed to by the option must contain 4 [Handlebars](http://handlebarsjs.com/) templates named the same way as those found in `./templates`.
@@ -114,9 +115,9 @@ Custom templates can be supplied via the `templates` option. The directory point
 * `operationLevel.handlebars`: the operation level template, for a single operation test suite
 * `transactionLevel.handlebars`: the template for a single transaction, or a single response code's unit test
 
-The data available to be used in the templates is specified in the [ProcessedSpec](https://noahdietz.github.io/oatts/processing.html#.ProcessedSpec__anchor) type.
+The data available to be used in the templates is specified in the `ProcessedSpec` type.
 
-There are also a few helpers available to be used in the Handlebars templates, which can be found in the [templateHelpers](https://noahdietz.github.io/oatts/templateHelpers.html) documentation namespace. Use the default templates as examples of how to use them.
+There are also a few helpers available to be used in the Handlebars templates, which can be found in the `templateHelpers` documentation namespace. Use the default templates as examples of how to use them.
 
 ## Options
 
@@ -136,6 +137,10 @@ The following options can be passed to the generation function, some/all are exp
 | `scheme` | `--scheme -m` | `spec.schemes[0]` | `false` | Override for multiple scheme present in a spec |
 | `templates` | `--templates -t` | `'./templates'` | `false` | Path to directory containing custom templates |
 | `statusCodes` |`--status-codes -S` | `operation.responses` | `false` | comma separated list of status codes to explicity generate tests for |
+| `jsonRefs` | | n/a | `false` | *(See [JsonRefs~JsonRefsOptions](https://github.com/whitlockjc/json-refs/blob/master/docs/API.md#module_JsonRefs..JsonRefsOptions))* |
+| `customFormats` | | n/a | `false` | The key/value pair of custom formats *(The keys are the format name and the values are async functions.  See [ZSchema Custom Formats](https://github.com/zaggino/z-schema#register-a-custom-format))* |
+| `customFormatGenerators` | | n/a | `false` | The key/value pair of custom format generators *(The keys are the format name and the values are functions.  See [json-schema-mocker Custom Format](https://github.com/json-schema-faker/json-schema-faker#custom-formats))* |
+| `customValidators` | | n/a | `false` | The custom validators. See [DocumentValidationFunction](https://github.com/apigee-127/sway/blob/master/docs/API.md#module_sway.DocumentValidationFunction) |
 
 ## Testing
 
@@ -143,9 +148,14 @@ To test this module simply use the `npm` script
 
     npm test
 
+## Discussion
+
+If you have a question or a topic you'd like to discuss, please feel free to open
+a discussion on our Google Group [oatts-users](https://groups.google.com/forum/#!forum/oatts-users/).
+
 ## Contributing
 
-Contributors are welcome! Please see [CONTRIBUTING.md](https://github.com/noahdietz/oatts/blob/master/CONTRIBUTING.md).
+Contributors are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Copyright
 
@@ -153,4 +163,4 @@ Copyright 2018, Google Inc.
 
 ## License
 
-See [LICENSE](https://github.com/noahdietz/oatts/blob/master/LICENSE) file.
+See [LICENSE](LICENSE) file.

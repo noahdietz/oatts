@@ -97,6 +97,7 @@ paths:
         description: "Status values that need to be considered for filter"
         required: true
         type: "array"
+        example: ["pending"]
         items:
           type: "string"
           enum:
@@ -105,6 +106,12 @@ paths:
           - "sold"
           default: "available"
         collectionFormat: "multi"
+      - name: "petName"
+        in: "query"
+        description: "petName value that can be considered for filter"
+        required: false
+        type: "string"
+        example: "toto"
       responses:
         200:
           description: "successful operation"
@@ -151,6 +158,11 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        examples:
+          two:
+            value: 2
+          five:
+            value: 5
     get:
       tags:
         - "pet"
@@ -186,11 +198,13 @@ paths:
           description: "Updated name of the pet"
           required: false
           type: "string"
+          example: "Rantanplan"
         - name: "status"
           in: "formData"
           description: "Updated status of the pet"
           required: false
           type: "string"
+          example: "sold"
       responses:
         405:
           description: "Invalid input"
@@ -210,6 +224,7 @@ paths:
         required: false
         type: "string"
         default: ""
+        example: "test_api_key"
       responses:
         400:
           description: "Invalid pet value"
@@ -231,16 +246,19 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+        example: 5
       - name: "additionalMetadata"
         in: "formData"
         description: "Additional data to pass to server"
         required: false
         type: "string"
+        example: null
       - name: "file"
         in: "formData"
         description: "file to upload"
         required: false
         type: "file"
+        example: null
       responses:
         200:
           description: "successful operation"

@@ -22,7 +22,7 @@ var join = require('path').join
 var merge2 = require('./lib/util').merge2
 
 module.exports = {
-    generate: generate
+  generate: generate
 }
 
 /**
@@ -40,37 +40,45 @@ module.exports = {
  * @return {Promise<GenerationResults>}
  */
 function generate(specPath, options) {
-    return sway.create({'definition': specPath})
-        .then(function (api) {
-            if (options.customValues) {
-                options.customValues = JSON.parse(options.customValues);
-            }
-            
-            if (options.customValuesFile) {
-                var customFromFile = require(join(process.cwd(), options.customValuesFile))
-                options.customValues = merge2(options.customValues, customFromFile)
-            }
+  return sway.create({
+    'definition': specPath,
+    'jsonRefs': options && options.jsonRefs,
+    'customFormats': options && options.customFormats,
+    'customFormatGenerators': options && options.customFormatGenerators,
+    'customValidators': options && options.customValidators
+  })
+      .then(function (api) {
+        if (options.customValues) {
+          options.customValues = JSON.parse(options.customValues);
+        }
 
-            var processed = proc(api, options)
-            var compiled = compile(processed, options)
+        if (options.customValuesFile) {
+          var customFromFile = require(
+              join(process.cwd(), options.customValuesFile))
+          options.customValues = merge2(options.customValues, customFromFile)
+        }
 
-            if (options.writeTo !== undefined) {
-                if (!fs.existsSync(options.writeTo)) {
-                    fs.mkdirSync(options.writeTo)
-                }
-                
-                compiled.forEach(function(testObj, ndx, arr) {
-                    fs.writeFile(join(options.writeTo, testObj.filename), testObj.contents, function(err) {
-                        if (err !== null) {
-                            console.error(err)
-                        }
-                    })
-                })
+        var processed = proc(api, options)
+        var compiled = compile(processed, options)
+
+        if (options.writeTo !== undefined) {
+          if (!fs.existsSync(options.writeTo)) {
+            fs.mkdirSync(options.writeTo)
+          }
+
+          try {
+            for (var i = 0; i < compiled.length; i++) {
+              const testObj = compiled[i];
+              fs.writeFileSync(join(options.writeTo, testObj.filename), testObj.contents)
             }
+          } catch (err) {
+            console.log(err);
+          }
+        }
 
-            return { 'generated': compiled }
-        }, function (err) {
-            console.error(err.stack);
-            return err
-        });
+        return {'generated': compiled}
+      }, function (err) {
+        console.error(err.stack);
+        return err
+      });
 }

@@ -1,4 +1,43 @@
-// Copyright 2018 Google Inc. All Rights Reserved.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/compile.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="compilation.html">compilation</a><ul class='methods'><li data-type='method'><a href="compilation.html#compile">compile</a></li><li data-type='method'><a href="compilation.html#compileOperationLevel">compileOperationLevel</a></li><li data-type='method'><a href="compilation.html#compilePathLevel">compilePathLevel</a></li><li data-type='method'><a href="compilation.html#compileTransactionLevel">compileTransactionLevel</a></li><li data-type='method'><a href="compilation.html#prepareTemplate">prepareTemplate</a></li></ul></li><li><a href="processing.html">processing</a><ul class='methods'><li data-type='method'><a href="processing.html#determineQueryType">determineQueryType</a></li><li data-type='method'><a href="processing.html#isNumberType">isNumberType</a></li><li data-type='method'><a href="processing.html#lookupCustomQueryValue">lookupCustomQueryValue</a></li><li data-type='method'><a href="processing.html#lookupCustomValue">lookupCustomValue</a></li><li data-type='method'><a href="processing.html#pathify">pathify</a></li><li data-type='method'><a href="processing.html#process">process</a></li><li data-type='method'><a href="processing.html#processHeaders">processHeaders</a></li><li data-type='method'><a href="processing.html#processOperations">processOperations</a></li><li data-type='method'><a href="processing.html#processParams">processParams</a></li><li data-type='method'><a href="processing.html#processPaths">processPaths</a></li><li data-type='method'><a href="processing.html#processResponse">processResponse</a></li><li data-type='method'><a href="processing.html#processTransactions">processTransactions</a></li><li data-type='method'><a href="processing.html#replaceNewlines">replaceNewlines</a></li></ul></li><li><a href="templateHelpers.html">templateHelpers</a><ul class='methods'><li data-type='method'><a href="templateHelpers.html#isNotDefaultStatusCode">isNotDefaultStatusCode</a></li><li data-type='method'><a href="templateHelpers.html#json">json</a></li><li data-type='method'><a href="templateHelpers.html#notEmptyObject">notEmptyObject</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html">generate</a></li><li><a href="global.html">merge2</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">lib/compile.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Copyright 2018 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +76,7 @@ handlebars.registerHelper('isNotDefaultStatusCode',
     helpers.isNotDefaultStatusCode)
 
 /**
- * GeneratedTest is the set of results from procressing a spec & compiling the test code
+ * GeneratedTest is the set of results from procressing a spec &amp; compiling the test code
  * @typedef {object} GeneratedTest
  * @memberof compilation
  * @property {string} filename A file name based off of the path being tested
@@ -75,7 +114,7 @@ function compile(processed, options) {
 }
 
 /**
- * GeneratedPath is the result of procressing a path & compiling the path-level test code
+ * GeneratedPath is the result of procressing a path &amp; compiling the path-level test code
  * @typedef {object} GeneratedPath
  * @memberof compilation
  * @property {string} test the generated test code portion
@@ -125,7 +164,7 @@ function compilePathLevel(processedPath, processed, options) {
 }
 
 /**
- * GeneratedOp is the result of procressing an operation & compiling the operation-level test code
+ * GeneratedOp is the result of procressing an operation &amp; compiling the operation-level test code
  * @typedef {object} GeneratedOp
  * @memberof compilation
  * @property {string} operationLevelDescription the operation level description to use incompilation
@@ -207,3 +246,22 @@ function prepareTemplate(templatePath) {
   var source = fs.readFileSync(templatePath, 'utf8');
   return handlebars.compile(source, {noEscape: true})
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 12:31:35 GMT+0100 (Western European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "name": "oatts",
-  "version": "1.2.2",
+  "version": "1.6.0",
   "description": "An Open API Test Template Generator",
   "keywords": [
     "Swagger",
@@ -8,6 +8,10 @@
     "Test",
     "API"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/google/oatts.git"
+  },
   "main": "index.js",
   "bin": {
     "oatts": "./bin/cli.js"
@@ -17,16 +21,16 @@
     "test": "mocha --recursive"
   },
   "author": "Noah Dietz",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "dependencies": {
-    "commander": "^2.9.0",
-    "handlebars": "^4.0.6",
-    "sway": "^1.0.0"
+    "commander": "^2.20.0",
+    "handlebars": "^4.1.2",
+    "sway": "^2.0.6"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "ink-docstrap": "^1.3.0",
-    "jsdoc": "^3.5.5",
-    "mocha": "^3.2.0"
+    "docdash": "^0.4.0",
+    "jsdoc": "^3.6.3",
+    "mocha": "^5.2.0"
   }
 }
